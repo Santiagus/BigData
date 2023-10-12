@@ -106,7 +106,8 @@ Haddop $ . .venv/bin/activate
 
 - Check default pdsh's rcmd with \
 ```pdsh -q -w localhost```
-sample output:
+    <details> <summary>sample output:</summary>
+
     ```sh
     -- DSH-specific options --
     Separate stderr/stdout  Yes
@@ -131,3 +132,10 @@ sample output:
     -- Target nodes --
     localhost
     ```
+    </details>
+
+- If Rcmd type is rsh set run following command : \
+```echo "export PDSH_RCMD_TYPE=ssh" >> ~/.bashrc```
+
+- If JAVA_HOME not defined error set it in *$HADOOP_HOME/etc/hadoop/hadoop-env.sh* \
+```echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/" >> $HOME_HADOOP/etc/hadoop/hadoop-env.sh```
