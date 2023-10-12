@@ -15,23 +15,29 @@ Prerequisites are : ssh, pdsh, java 8 or 11
 
 ## Commands
 - Create Hadoop folder, set virtual environment and install prerequisites:
-```bash
-$ mkdir Hadoop
-Haddop $ python -m venv .venv
-Haddop $ . .venv/bin/activate
-(.venv) $ sudo apt-get update
-(.venv) $ sudo apt-get install ssh
-(.venv) $ sudo apt-get install pdsh
-```
+    ```bash
+    $ mkdir Hadoop
+    Haddop $ python -m venv .venv
+    Haddop $ . .venv/bin/activate
+    (.venv) $ sudo apt-get update
+    (.venv) $ sudo apt-get install ssh
+    (.venv) $ sudo apt-get install pdsh
+    ```
 - Install compatible JAVA version
-```
-(.venv) $ sudo su -c "echo 'deb http://ftp.de.debian.org/debian bullseye main' > /etc/apt/sources.list.d/debian-bullseye.list"
-(.venv) $ sudo apt-get install openjdk-11-jre
-(.venv) $ java --version
+    ```sh
+    (.venv) $ sudo su -c "echo 'deb http://ftp.de.debian.org/debian bullseye main' > /etc/apt/sources.list.d/debian-bullseye.list"
+    (.venv) $ sudo apt-get install openjdk-11-jre
+    (.venv) $ java --version```
+    ```
+    <details><summary>sample output</summary>
+
+    ```
     openjdk 11.0.20 2023-07-18
     OpenJDK Runtime Environment (build 11.0.20+8-post-Debian-1deb11u1)
     OpenJDK 64-Bit Server VM (build 11.0.20+8-post-Debian-1deb11u1, mixed mode, sharing)
-```
+    ```
+    </details>
+
 - Download last hadoop version available: \
 ```wget https://dlcdn.apache.org/hadoop/common/stable/hadoop-3.3.6.tar.gz```
 - Extract the file using : \
@@ -42,7 +48,7 @@ Haddop $ . .venv/bin/activate
 - Set environment variables, add this at the end of ~/.basrh \
     ```bash
     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
-    export HADOOP_HOME=$HOME/hadoop #location of your hadoop file directory
+    export HADOOP_HOME=$HOME/hadoop       # location of your hadoop file directory
     export HADOOP_MAPRED_HOME=$HADOOP_HOME
     export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
     export HADOOP_COMMON_HOME=$HADOOP_HOME
@@ -50,11 +56,14 @@ Haddop $ . .venv/bin/activate
     export YARN_HOME=$HADOOP_HOME
     export HADOOP_USER_CLASSPATH_FIRST=true
 
-    alias hadoop=$HADOOP_HOME/bin/./hadoop #for convenience
-    alias hdfs=$HADOOP_HOME/bin/./hdfs #for convenience
+    alias hadoop=$HADOOP_HOME/bin/./hadoop # for convenience
+    alias hdfs=$HADOOP_HOME/bin/./hdfs     # for convenience
+    alias hdir='cd $HADOOP_HOME'           # for convenience
     ``` 
-- Execute : \
-```~/hadoop/bin/hadoop```
+- For adding the specified environment variables run: \
+```$ source ~/.bashrc```
+- Check hadoop works: \
+``` $ hadoop```
 - Copy unpacked conf dir to use as input
     ```bash
     (.venv) $ cd ~/hadoop
@@ -87,7 +96,7 @@ Haddop $ . .venv/bin/activate
 ```(.venv) $ ssh localhost```
 
     ***NOTE:*** If using WSL (Windows Subsystem for Linux) start the ssh service executing the next command :\
-    ```service ssh start```
+    ```$ service ssh start```
 
 - If you cannot ssh to localhost without a passphrase, execute the following commands:
     ```sh
@@ -102,10 +111,10 @@ Haddop $ . .venv/bin/activate
 - Start NameNode daemon and DataNode daemon: \
 ```(.venv) $ sbin/start-dfs.sh```
 - If getting: \
-```localhost: rcmd: socket: Permission denied```
+```$ localhost: rcmd: socket: Permission denied```
 
 - Check default pdsh's rcmd with \
-```pdsh -q -w localhost```
+```$ pdsh -q -w localhost```
     <details> <summary>sample output:</summary>
 
     ```sh
@@ -135,7 +144,28 @@ Haddop $ . .venv/bin/activate
     </details>
 
 - If Rcmd type is rsh set run following command : \
-```echo "export PDSH_RCMD_TYPE=ssh" >> ~/.bashrc```
+```$ echo "export PDSH_RCMD_TYPE=ssh" >> ~/.bashrc```
 
 - If JAVA_HOME not defined error set it in *$HADOOP_HOME/etc/hadoop/hadoop-env.sh* \
-```echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/" >> $HOME_HADOOP/etc/hadoop/hadoop-env.sh```
+
+    ```$ echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/" >> $HOME_HADOOP/etc/hadoop/hadoop-env.sh```
+
+- Check web interface for NameNode: by default available at: \
+http://localhost:9870/
+
+- Make the HDFS directories required to execute MapReduce jobs: \
+```$ bin/hdfs dfs -mkdir -p /user/<username> ```
+
+- Copy the input files into the distributed filesystem: \
+    ```$ bin/hdfs dfs -mkdir input``` \
+    ```$ bin/hdfs dfs -put etc/hadoop/*.xml input```
+- Run some of the examples provided: \
+```$ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.6.jar grep input output 'dfs[a-z.]+'```
+- Examine the output files: Copy the output files from the distributed filesystem to the local filesystem and examine them: \
+```$ bin/hdfs dfs -get output output``` \
+```$ cat output/*``` \
+or \
+View the output files on the distributed filesystem: \
+ ```$ bin/hdfs dfs -cat output/*```
+- When you’re done, stop the daemons with: \
+ ```$ sbin/stop-dfs.sh ```
