@@ -8,6 +8,8 @@ Ambari also provides a dashboard for viewing cluster health such as heatmaps and
 - [Github](https://github.com/apache/ambari)
 - [Installation Guide Ambari 2.7.7](https://cwiki.apache.org/confluence/display/AMBARI/Installation+Guide+for+Ambari+2.7.7)
 - [Quick Start Guide](https://cwiki.apache.org/confluence/display/AMBARI/Quick+Start+Guide)
+- [CentOS WSL](https://github.com/mishamosher/CentOS-WSL/releases)
+- [Ambari rpm packages for centos7](https://clemlabs.s3.eu-west-3.amazonaws.com/centos7/ambari-release/2.7.6.0-22/repos-ambari.tar.gz)
 
 ## ***Notes:***
 Building process is plenty of bugs and deprecated so you will have to do some or all of:
