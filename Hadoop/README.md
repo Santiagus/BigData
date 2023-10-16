@@ -22,20 +22,29 @@ Prerequisites are : ssh, pdsh, java 8 or 11
     (.venv) $ sudo apt-get install ssh
     (.venv) $ sudo apt-get install pdsh
     ```
-- Install compatible JAVA version
-    ```sh
-    (.venv) $ sudo su -c "echo 'deb http://ftp.de.debian.org/debian bullseye main' > /etc/apt/sources.list.d/debian-bullseye.list"
-    (.venv) $ sudo apt-get install openjdk-11-jre
-    (.venv) $ java --version```
+- Install compatible JAVA version (Debian)
+    <!-- (.venv) $ sudo su -c "echo 'deb http://ftp.de.debian.org/debian bullseye main' > /etc/apt/sources.list.d/debian-bullseye.list" -->
+    <!-- (.venv) $ sudo apt-get install openjdk-11-jre -->
+    ```sh    
+    (.venv) $ sudo su -c "echo 'deb http://ftp.de.debian.org/debian sid main' > /etc/apt/sources.list.d/debian-sid.list"
+    (.venv) $ sudo apt-get update    
+    (.venv) $ sudo apt-get install openjdk-8-jdk
+    (.venv) $ java -version```
     ```
     <details><summary>sample output</summary>
 
     ```
-    openjdk 11.0.20 2023-07-18
-    OpenJDK Runtime Environment (build 11.0.20+8-post-Debian-1deb11u1)
-    OpenJDK 64-Bit Server VM (build 11.0.20+8-post-Debian-1deb11u1, mixed mode, sharing)
+    openjdk version "1.8.0_382"
+    OpenJDK Runtime Environment (build 1.8.0_382-8u382-ga-2-b05)
+    OpenJDK 64-Bit Server VM (build 25.382-b05, mixed mode)
     ```
     </details>
+
+- Install compatible JAVA version (CentOS7)
+```sudo yum install java-1.8.0-openjdk-devel```
+
+- If several JAVA versions installed use the following command to activate the desired one (JAVA 8): \
+```sudo update-alternatives --config java```
 
 - Download last hadoop version available: \
 ```wget https://dlcdn.apache.org/hadoop/common/stable/hadoop-3.3.6.tar.gz```
@@ -44,9 +53,10 @@ Prerequisites are : ssh, pdsh, java 8 or 11
 
 - Copy the Hadoop-3.3.6 folder to */home/username/hadoop*: \
 ```mv hadoop-3.3.6 $HOME/hadoop```
+<!-- export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ -->
 - Set environment variables, add this at the end of ~/.basrh \
     ```bash
-    export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
     export HADOOP_HOME=$HOME/hadoop       # location of your hadoop file directory
     export HADOOP_MAPRED_HOME=$HADOOP_HOME
     export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
