@@ -18,7 +18,14 @@ Four using **Jupiter Notebooks** throw Visual Studio code
 3. Install the Jupyter Extension and the Python Extension
 4. Open or create a notebook file by opening the Command Palette (Ctrl+Shift+P) and select Jupyter: Create New Jupyter Notebook.
 
-# Docker image with spark-py setup
+## Docker image with spark-py setup
 1. Install docker
 2. Pull spark-py image from [docker Hub](https://hub.docker.com/r/apache/spark-py/tags) \
 `docker pull apache/spark-py:latest`
+
+
+## Environment setup
+- All used packages are in requirements.txt, use the following command to set up your venv. \
+```pip install -r requirements.txt```
+
+For Jupyter Notebooks, instructions for packages installation has been explicitly added in each one.
