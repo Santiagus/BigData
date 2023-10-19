@@ -10,13 +10,16 @@ Ambari also provides a dashboard for viewing cluster health such as heatmaps and
 - [Quick Start Guide](https://cwiki.apache.org/confluence/display/AMBARI/Quick+Start+Guide)
 - [CentOS WSL](https://github.com/mishamosher/CentOS-WSL/releases)
 - [Ambari rpm packages for centos7](https://clemlabs.s3.eu-west-3.amazonaws.com/centos7/ambari-release/2.7.6.0-22/repos-ambari.tar.gz)
+- [Docker Images](https://hub.docker.com/search?q=ambari)
 
 ## ***Notes:***
 Building process is plenty of bugs and deprecated so you will have to do some or all of:
 - Add Repositories / download some packages manually
 - Update *pow.xml* files to remove WARNINGS or ERRORS due to duplicated refs or non found package versions
 
-**Go for precompiled www.opensourcedataplatform.com packages as recommended below!!!**
+## Recommended Aproaches:
+- [Docker Images](https://hub.docker.com/search?q=ambari)
+- [Precompiled packages](https://clemlabs.s3.eu-west-3.amazonaws.com/centos7/ambari-release/2.7.6.0-22/repos-ambari.tar.gz)
 
 
 ## Prerequisites
@@ -110,7 +113,7 @@ Run *mvn* with *-Drat.skip=true \
 ```$ cd ambari-server/target/rpm/ambari-server/RPMS/noarch/```
 
 
-## Alternative (Recommended)
+## Alternative
 
 https://www.opensourcedataplatform.com/en/docs/installation-01-ambari
 
