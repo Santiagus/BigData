@@ -12,6 +12,8 @@ List of the technologies and tools for big data projects:
 
 ***NOTE:*** Added (<num_jobs>) next to the tool name as reference (metric) to establish an orden (prioritize) based on job market demand. (just for some)
 
+Related Programming Languages Python, Scala, Java
+
 1. **Data Ingestion and Collection**:
    - [Apache Kafka](https://kafka.apache.org/) ([778](https://uk.indeed.com/jobs?q=kafka&l=&vjk=f4531e1bb25afbb1)) : A real-time data streaming platform for event sourcing.
    - [Apache NiFi](https://nifi.apache.org/) ([34](https://uk.indeed.com/jobs?q=nifi&l=&vjk=b0085634ddee6b3c)) : An integrated data logistics platform for automating data movement.
