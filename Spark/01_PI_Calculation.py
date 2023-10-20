@@ -1,8 +1,11 @@
-#Import statements
+# Import statements
 import sys
 from random import random
 from operator import add
 from pyspark import SparkContext
+
+# For checking Python version
+import platform
 
 if __name__ == "__main__":
     """
@@ -10,7 +13,10 @@ if __name__ == "__main__":
     """
     #Create the SparkContext
     sc = SparkContext(appName="PythonPi")
+    sc.setLogLevel("INFO")
 
+    print(f"Spark version : {sc.version}")
+    print(f"Python version : {platform.python_version()}")
     #Run the calculations to estimate Pi
     partitions = int(sys.argv[1]) if len(sys.argv) > 1 else 2
     n = 100000 * partitions
