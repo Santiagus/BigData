@@ -148,4 +148,30 @@ def most_frequent_words() -> MaterializeResult:
 ```
 </details>
 
+## Add job
 
+Jobs lets you target a selection of asets to materialize them together as a single action.
+
+<details><summary>__init__.py</summary>
+
+```python
+from dagster import (
+    AssetSelection,
+    Definitions,
+    define_asset_job,
+    load_assets_from_modules,
+)
+
+from . import assets
+
+all_assets = load_assets_from_modules([assets])
+
+# Addition: define a job that will materialize the assets
+hackernews_job = define_asset_job("hackernews_job", selection=AssetSelection.all())
+
+defs = Definitions(
+    assets=all_assets,
+    jobs=[hackernews_job],  # Addition: add the job to Definitinos object
+)
+```
+</details>
