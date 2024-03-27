@@ -42,6 +42,7 @@ Related Programming Languages Python, Scala, Java
    - [Apache Airflow](https://airflow.apache.org/) ([432](https://uk.indeed.com/jobs?q=Airflow&l=&vjk=9ac7d7fa69ae76c0)): Workflow automation and scheduling.
    - [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/v1/introduction/) ([32](https://uk.indeed.com/jobs?q=Kubeflow&l=&vjk=434da02026e15697)): Management of machine learning workflows on Kubernetes.
    - [Apache Oozie](http://oozie.apache.org/) ([5](https://uk.indeed.com/jobs?q=Oozie&l=&vjk=5ab256f058e15ccb)): Job scheduling, workflow management, and automation.
+   - [dagster](https://dagster.io/) []() : Dagster is an orchestrator that's designed for developing and maintaining data assets, such as tables, data sets, machine learning models, and reports.
 
 6. **Machine Learning and AI**:
    - [TensorFlow](https://www.tensorflow.org/) ([330](https://uk.indeed.com/jobs?q=TensorFlow&l=&vjk=8a551936816d81ba)): Open-source machine learning framework.
