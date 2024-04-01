@@ -20,7 +20,9 @@ hackernews_schedule = ScheduleDefinition(
     cron_schedule="0 * * * *",  # every hour
 )
 
-datagen = resources.DataGeneratorResource()  # Make the resource
+datagen = resources.DataGeneratorResource(
+    num_days=365
+)  # Update to get a year's worth of data (a week by default)
 
 defs = Definitions(
     assets=all_assets,
