@@ -190,3 +190,36 @@ hackernews_schedule = ScheduleDefinition(
 )
 ```
 </details>
+
+
+## Connecting to external services (APIs)
+
+The generated scaffolded Dagster project has a directory called resources with an __init__.py file in it. It exposes a resource called DataGeneratorResource. This resource generates simulated data about Hacker News signups.
+
+You'll use this resource to get the data needed to produce an asset for analysis.
+
+We immport he class and create an instance of it and add it to the resources as follows:
+
+<details><summary>__init__.py</summary>
+
+```python
+from .resources import DataGeneratorResource
+# ...
+datagen = DataGeneratorResource()  # Make the resource
+
+defs = Definitions(
+    assets=all_assets,
+    schedules=[hackernews_schedule],
+    resources={
+        "hackernews_api": datagen,  # Add the newly-made resource here
+    },
+)
+```
+</details>
+
+To confirm it is working:
+- Reload definitions in Dagster web UI (Assets\Reload Definitions)
+- Go to Overview\Resources and find *hackernews_api* resource.
+
+
+
