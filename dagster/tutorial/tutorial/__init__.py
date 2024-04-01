@@ -22,4 +22,5 @@ hackernews_schedule = ScheduleDefinition(
 defs = Definitions(
     assets=all_assets,
     jobs=[hackernews_job],  # Addition: add the job to Definitinos object
+    schedules=[hackernews_schedule],  # Addition: add the schedule Definitinos object
 )
