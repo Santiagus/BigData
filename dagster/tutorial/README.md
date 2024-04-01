@@ -221,5 +221,28 @@ To confirm it is working:
 - Reload definitions in Dagster web UI (Assets\Reload Definitions)
 - Go to Overview\Resources and find *hackernews_api* resource.
 
+### Using the resource
+
+In *assets.py* add a new asset called **signups** to fetch data from a simulated external service.
+
+<details><summary>assets.py</summary>
+
+```python
+@asset
+def signups(hackernews_api: DataGeneratorResource) -> MaterializeResult:
+    signups = pd.DataFrame(hackernews_api.get_signups())
+
+    signups.to_csv("data/signups.csv")
+
+    return MaterializeResult(
+        metadata={
+            "Record Count": len(signups),
+            "Preview": MetadataValue.md(signups.head().to_markdown()),
+            "Earliest Signup": signups["registered_at"].min(),
+            "Latest Signup": signups["registered_at"].max(),
+        }
+    )
+```
+</details>
 
 
