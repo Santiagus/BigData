@@ -7,6 +7,7 @@ from dagster import (
 )
 
 from . import assets
+from . import resources
 
 all_assets = load_assets_from_modules([assets])
 
@@ -19,8 +20,13 @@ hackernews_schedule = ScheduleDefinition(
     cron_schedule="0 * * * *",  # every hour
 )
 
+datagen = resources.DataGeneratorResource()  # Make the resource
+
 defs = Definitions(
     assets=all_assets,
     jobs=[hackernews_job],  # Addition: add the job to Definitinos object
     schedules=[hackernews_schedule],  # Addition: add the schedule Definitinos object
+    resources={
+        "hackernews_api": datagen,  # Add the newly-made resource here
+    },
 )
