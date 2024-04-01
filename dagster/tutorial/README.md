@@ -246,3 +246,34 @@ def signups(hackernews_api: DataGeneratorResource) -> MaterializeResult:
 </details>
 
 
+### Configuring based on the environment
+
+Set the environment variables in a .env file in the root folder.
+
+<details><summary>.env</summary>
+
+```bash
+HACKERNEWS_NUM_DAYS_WINDOW=30
+```
+</details>
+
+
+Update your __init__.py with the changes below:
+
+<details><summary>__init__.py</summary>
+
+```python
+from dagster import (
+    EnvVar,
+)
+
+# Configure the resource with an environment variable here
+datagen = DataGeneratorResource(
+    num_days=EnvVar.int("HACKERNEWS_NUM_DAYS_WINDOW"),
+)
+```
+</details>
+</br>
+
+Restart your Dagster instance, materialize your signups asset, and observe how the Earliest Signup metadata value is 30 days ago from today.
+
