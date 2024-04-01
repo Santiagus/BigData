@@ -175,3 +175,18 @@ defs = Definitions(
 )
 ```
 </details>
+
+## Schedule materializations
+
+After the job definition it can be attached to a schedule with the *ScheduleDefinition* class.
+
+<details><summary>__init__.py</summary>
+
+```python
+# Addition: a ScheduleDefinition the job it should run and a cron schedule of how frequently to run it
+hackernews_schedule = ScheduleDefinition(
+    job=hackernews_job,
+    cron_schedule="0 * * * *",  # every hour
+)
+```
+</details>
