@@ -10,6 +10,7 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 
 from dagster import asset, AssetExecutionContext, MetadataValue, MaterializeResult
+from .resources import DataGeneratorResource
 
 
 @asset
@@ -95,3 +96,19 @@ def most_frequent_words() -> MaterializeResult:
 
     # Attach the Markdown content as metadata to the asset
     return MaterializeResult(metadata={"plot": MetadataValue.md(md_content)})
+
+
+@asset
+def signups(hackernews_api: DataGeneratorResource) -> MaterializeResult:
+    signups = pd.DataFrame(hackernews_api.get_signups())
+
+    signups.to_csv("data/signups.csv")
+
+    return MaterializeResult(
+        metadata={
+            "Record Count": len(signups),
+            "Preview": MetadataValue.md(signups.head().to_markdown()),
+            "Earliest Signup": signups["registered_at"].min(),
+            "Latest Signup": signups["registered_at"].max(),
+        }
+    )
